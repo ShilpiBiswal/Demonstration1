@@ -1,0 +1,36 @@
+name: Push and Pull Jobs
+
+on: 
+  push:   # Run this workflow when code is pushed
+  pull_request:  # Run this workflow on pull requests
+
+jobs:
+  push-job:
+    name: Run on Push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Run push job
+        run: |
+          echo "This is the push job running on Ubuntu!"
+          python --version
+
+  pull-job:
+    name: Run on Pull Request
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run pull job
+        run: |
+          echo "This is the pull request job running on Ubuntu!"
+          uname -a
+
